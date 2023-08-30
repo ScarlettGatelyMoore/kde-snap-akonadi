@@ -4,6 +4,7 @@ base: core22
 adopt-info: akregator
 confinement: strict
 grade: stable
+version: 23.08.0
 assumes:
 - snapd2.55.3
 compression: lzo
