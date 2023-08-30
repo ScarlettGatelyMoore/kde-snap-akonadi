@@ -1,7 +1,7 @@
 ---
 name: akonadi
 base: core22
-adopt-info: akregator
+adopt-info: akonadi
 confinement: strict
 grade: stable
 version: 23.08.0
@@ -56,7 +56,7 @@ parts:
         after:
         - kde-neon
         parse-info:
-        - usr/share/metainfo/org.kde.akregator.appdata.xml
+        - usr/share/metainfo/org.kde.akonadi.appdata.xml
         plugin: cmake
         build-packages:
         - cmake
