@@ -1,7 +1,8 @@
 ---
 name: akonadi
 base: core22
-adopt-info: akonadi
+summary: KDE Akonadi data server for PIM applications
+description: KDE Akonadi data server for PIM applications shared dbus provider
 confinement: strict
 grade: stable
 version: 23.08.0
@@ -55,8 +56,6 @@ parts:
     akonadi:
         after:
         - kde-neon
-        parse-info:
-        - usr/share/metainfo/org.kde.akonadi.appdata.xml
         plugin: cmake
         build-packages:
         - cmake
