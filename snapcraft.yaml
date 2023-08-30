@@ -59,6 +59,13 @@ parts:
         plugin: cmake
         build-packages:
         - cmake
+        - libaccounts-qt5-dev
+        - libkaccounts-dev
+        - xsltproc
+        - lzma-dev
+        stage-packages:
+        - libaccounts-qt5-1
+        - libkaccounts2
         source: https://invent.kde.org/pim/akonadi.git
         source-tag: v23.08.0
         cmake-parameters:
