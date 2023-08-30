@@ -62,7 +62,7 @@ parts:
         - libaccounts-qt5-dev
         - libkaccounts-dev
         - xsltproc
-        - lzma-dev
+        - liblzma-dev
         stage-packages:
         - libaccounts-qt5-1
         - libkaccounts2
