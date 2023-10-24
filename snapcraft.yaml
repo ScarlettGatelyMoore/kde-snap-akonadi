@@ -5,7 +5,7 @@ summary: KDE Akonadi data server for PIM applications
 description: KDE Akonadi data server for PIM applications shared dbus provider
 confinement: strict
 grade: stable
-version: 23.08.0
+version: 23.08.2
 assumes:
 - snapd2.55.3
 compression: lzo
@@ -25,7 +25,76 @@ apps:
         command: usr/bin/akonadiserver
         daemon: simple
         slots: [dbus-svc]
-
+    akonadiconsole:
+        command: usr/bin/akonadiconsole
+        desktop: usr/share/applications/org.kde.akonadiconsole.desktop
+        common-id: org.kde.akonadiconsole
+        plugs:
+        - desktop
+        - desktop-legacy
+        - opengl
+        - wayland
+        - x11
+        - audio-playback
+        - network
+        - network-bind
+        - network-manager-observe
+        - unity7
+        - cups
+        command-chain:
+        - snap/command-chain/desktop-launch
+assumes:
+- snapd2.58.3
+compression: lzo
+plugs:
+    desktop:
+        mount-host-font-cache: false
+    icon-themes:
+        interface: content
+        target: $SNAP/data-dir/icons
+        default-provider: gtk-common-themes
+    sound-themes:
+        interface: content
+        target: $SNAP/data-dir/sounds
+        default-provider: gtk-common-themes
+    kf5-5-110-qt-5-15-11-core22:
+        content: kf5-5-110-qt-5-15-11-core22-all
+        interface: content
+        default-provider: kf5-5-110-qt-5-15-11-core22
+        target: $SNAP/kf5
+    foo-install-cups:
+        interface: content
+        content: foo
+        default-provider: cups
+        target: $SNAP_DATA/foo
+    hunspell-dictionaries:
+        content: hunspell-dictionaries
+        interface: content
+        target: "$SNAP/usr/share/hunspell"
+        default-provider: hunspell-dictionaries:hunspell-dictionaries
+environment:
+    SNAP_DESKTOP_RUNTIME: $SNAP/kf5
+    DK_PLUGIN_PATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/plugins/digikam"
+    PERL5LIB: "$SNAP/usr/share/perl5"
+    LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/:$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/:$SNAP/usr/lib:/$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/blas:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lapack"
+    DICPATH: "$SNAP/usr/share/hunspell"
+hooks:
+    configure:
+        plugs:
+        - desktop
+        command-chain:
+        - snap/command-chain/hooks-configure-desktop
+layout:
+    /usr/share/marble:
+        symlink: $SNAP/usr/share/marble
+    /usr/share/qt5:
+        symlink: $SNAP/kf5/usr/share/qt5
+    /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib:
+        symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib
+    /usr/share/alsa:
+        symlink: $SNAP/usr/share/alsa
+    /usr/share/X11:
+        symlink: $SNAP/kf5/usr/share/X11
 package-repositories:
 -   type: apt
     components:
@@ -41,40 +110,265 @@ parts:
         source-type: local
         plugin: make
         make-parameters:
-        - PLATFORM_PLUG=kf5-5-108-qt-5-15-10-core22
+        - PLATFORM_PLUG=kf5-5-110-qt-5-15-11-core22
         build-snaps:
-        - kf5-5-108-qt-5-15-10-core22-sdk
+        - kf5-5-110-qt-5-15-11-core22-sdk
         build-environment:
         - &id001
-            PATH: /snap/kf5-5-108-qt-5-15-10-core22-sdk/current/usr/bin${PATH:+:$PATH}
+            PATH: /snap/kf5-5-110-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
         - &id002
-            XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-108-qt-5-15-10-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+            XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-110-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
         - &id003
-            XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-108-qt-5-15-10-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+            XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-110-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
         - &id004
-            CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-108-qt-5-15-10-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
+            CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-110-qt-5-15-11-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
     akonadi:
         after:
         - kde-neon
         plugin: cmake
         build-packages:
         - cmake
+        - kdesignerplugin
+        - kgendesignerplugin
+        - libaccounts-glib-dev
         - libaccounts-qt5-dev
+        - libboost-dev
         - libkaccounts-dev
-        - xsltproc
         - liblzma-dev
+        - libmariadb-dev-compat
+        - libsqlite3-dev
+        - libxml2-dev
+        - libxml2-utils
+        - libxslt1-dev
+        - pkg-config
+        - qtbase5-private-dev
+        - shared-mime-info
+        - xsltproc
         stage-packages:
         - libaccounts-qt5-1
         - libkaccounts2
+        - mariadb-client-core-10.6
+        - mariadb-server-core-10.6
+        - postgresql
+        - libaccounts-qt5-1
+        - libc6
+        - libgcc-s1
+        - libstdc++6
+        - libxml2
+        - liblzma5
         source: https://invent.kde.org/pim/akonadi.git
-        source-tag: v23.08.0
+        source-branch: release/23.08
         cmake-parameters:
         - "-DCMAKE_INSTALL_PREFIX=/usr"
         - "-DCMAKE_BUILD_TYPE=Release"
         - "-DENABLE_TESTING=OFF"
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-108-qt-5-15-10-core22-sdk/current"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
+        build-environment: &id005
+        - *id001
+        - *id002
+        - *id003
+        - *id004
+        prime:
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze-dark*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+        - "-usr/lib/aspell/*"
+        - "-etc/alsa/conf.d/99-pulse.conf"
+    akonadi-mime:
+        after:
+        - kde-neon
+        - akonadi
+        plugin: cmake
+        build-packages:
+        - cmake
+        - libkf5mime-dev
+        - libxslt1-dev
+        - pkg-config
+        - shared-mime-info
+        - xsltproc
+        stage-packages:
+        - libc6
+        - libgcc-s1
+        - libkf5mime5
+        - libstdc++6
+        source: https://invent.kde.org/pim/akonadi-mime.git
+        source-branch: release/23.08
+        cmake-parameters:
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
+        build-environment: &id005
+        - *id001
+        - *id002
+        - *id003
+        - *id004
+        prime:
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze-dark*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+        - "-usr/lib/aspell/*"
+        - "-etc/alsa/conf.d/99-pulse.conf"
+    akonadi-search:
+        after:
+        - kde-neon
+        - akonadi
+        - akonadi-mime
+        plugin: cmake
+        build-packages:
+        - cmake
+        - libkaccounts-dev
+        - libkf5calendarcore-dev
+        - libkf5contacts-dev
+        - libkf5mime-dev
+        - libxapian-dev
+        stage-packages:
+        - libc6
+        - libgcc-s1
+        - libstdc++6 (>= 5)
+        - libxapian30
+        - libkf5mime5
+        - libkf5calendarcore5
+        source: https://invent.kde.org/pim/akonadi-search.git
+        source-branch: release/23.08
+        cmake-parameters:
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
+        build-environment: &id005
+        - *id001
+        - *id002
+        - *id003
+        - *id004
+        prime:
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze-dark*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+        - "-usr/lib/aspell/*"
+        - "-etc/alsa/conf.d/99-pulse.conf"
+    akonadi-contact:
+        after:
+        - kde-neon
+        - akonadi
+        - akonadi-mime
+        plugin: cmake
+        build-packages:
+        - cmake
+        - libkf5calendarcore-dev
+        - libkf5calendarutils-dev
+        - libkf5contacts-dev
+        - libkf5identitymanagement-dev
+        - libkf5libkdepim-dev
+        - libkf5mailtransport-dev
+        - libkf5messagecore-dev
+        - libkf5messagecomposer-dev
+        - libkf5templateparser-dev
+        - libkf5mimetreeparser-dev
+        - libqgpgme-dev
+        stage-packages:
+        - libc6
+        - libgcc-s1
+        - libgpgmepp6
+        - libkf5calendarcore5
+        - libkf5calendarutils5
+        - libkf5contacts5
+        - libkf5libkleo5
+        - libkf5mailtransport5
+        - libkf5messagecomposer5
+        - libkf5messagecore5
+        - libkf5mime5
+        - libqgpgme15
+        - libstdc++6
+        source: https://invent.kde.org/pim/akonadi-contact.git
+        source-branch: release/23.08
+        cmake-parameters:
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
+        build-environment: &id005
+        - *id001
+        - *id002
+        - *id003
+        - *id004
+        prime:
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze-dark*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+        - "-usr/lib/aspell/*"
+        - "-etc/alsa/conf.d/99-pulse.conf"
+    akonadi-calendar:
+        after:
+        - kde-neon
+        - akonadi
+        - akonadi-contact
+        - akonadi-search
+        plugin: cmake
+        build-packages:
+        - cmake
+        - libkf5calendarcore-dev
+        - libkf5calendarutils-dev
+        - libkf5contacts-dev
+        - libkf5identitymanagement-dev
+        - libkf5libkdepim-dev
+        - libkf5mailtransport-dev
+        - libkf5messagecore-dev
+        - libkf5messagecomposer-dev
+        - libkf5templateparser-dev
+        - libkf5mimetreeparser-dev
+        - libqgpgme-dev
+        stage-packages:
+        - libc6
+        - libgcc-s1
+        - libgpgmepp6
+        - libkf5calendarcore5
+        - libkf5calendarutils5
+        - libkf5contacts5
+        - libkf5libkleo5
+        - libkf5mailtransport5
+        - libkf5messagecomposer5
+        - libkf5messagecore5
+        - libkf5mime5
+        - libqgpgme15
+        - libstdc++6
+        source: https://invent.kde.org/pim/akonadi-calendar.git
+        source-branch: release/23.08
+        cmake-parameters:
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
         build-environment: &id005
         - *id001
         - *id002
