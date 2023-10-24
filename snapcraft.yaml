@@ -146,9 +146,6 @@ parts:
         - mariadb-server-core-10.6
         - postgresql
         - libaccounts-qt5-1
-        - libc6
-        - libgcc-s1
-        - libstdc++6
         - libxml2
         - liblzma5
         source: https://invent.kde.org/pim/akonadi.git
@@ -189,10 +186,7 @@ parts:
         - shared-mime-info
         - xsltproc
         stage-packages:
-        - libc6
-        - libgcc-s1
         - libkf5mime5
-        - libstdc++6
         source: https://invent.kde.org/pim/akonadi-mime.git
         source-branch: release/23.08
         cmake-parameters:
@@ -228,9 +222,6 @@ parts:
         - libkf5mime-dev
         - libxapian-dev
         stage-packages:
-        - libc6
-        - libgcc-s1
-        - libstdc++6 (>= 5)
         - libxapian30
         - libkf5mime5
         - libkf5calendarcore5
@@ -276,8 +267,6 @@ parts:
         - libkf5mimetreeparser-dev
         - libqgpgme-dev
         stage-packages:
-        - libc6
-        - libgcc-s1
         - libgpgmepp6
         - libkf5calendarcore5
         - libkf5calendarutils5
@@ -288,7 +277,6 @@ parts:
         - libkf5messagecore5
         - libkf5mime5
         - libqgpgme15
-        - libstdc++6
         source: https://invent.kde.org/pim/akonadi-contact.git
         source-branch: release/23.08
         cmake-parameters:
@@ -332,8 +320,6 @@ parts:
         - libkf5mimetreeparser-dev
         - libqgpgme-dev
         stage-packages:
-        - libc6
-        - libgcc-s1
         - libgpgmepp6
         - libkf5calendarcore5
         - libkf5calendarutils5
@@ -344,7 +330,6 @@ parts:
         - libkf5messagecore5
         - libkf5mime5
         - libqgpgme15
-        - libstdc++6
         source: https://invent.kde.org/pim/akonadi-calendar.git
         source-branch: release/23.08
         cmake-parameters:
