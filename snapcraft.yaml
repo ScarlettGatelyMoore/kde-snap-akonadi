@@ -6,8 +6,6 @@ description: KDE Akonadi data server for PIM applications shared dbus provider
 confinement: strict
 grade: stable
 version: 23.08.2
-assumes:
-- snapd2.55.3
 compression: lzo
 architectures:
   - build-on: amd64
@@ -45,7 +43,6 @@ apps:
         - snap/command-chain/desktop-launch
 assumes:
 - snapd2.58.3
-compression: lzo
 plugs:
     desktop:
         mount-host-font-cache: false
@@ -85,8 +82,6 @@ hooks:
         command-chain:
         - snap/command-chain/hooks-configure-desktop
 layout:
-    /usr/share/marble:
-        symlink: $SNAP/usr/share/marble
     /usr/share/qt5:
         symlink: $SNAP/kf5/usr/share/qt5
     /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib:
@@ -207,11 +202,7 @@ parts:
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
         - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
-        build-environment: &id005
-        - *id001
-        - *id002
-        - *id003
-        - *id004
+        build-environment: *id005
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -252,11 +243,7 @@ parts:
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
         - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
-        build-environment: &id005
-        - *id001
-        - *id002
-        - *id003
-        - *id004
+        build-environment: *id005
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -273,6 +260,7 @@ parts:
         - kde-neon
         - akonadi
         - akonadi-mime
+        - akonadi-search
         plugin: cmake
         build-packages:
         - cmake
@@ -310,11 +298,7 @@ parts:
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
         - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
-        build-environment: &id005
-        - *id001
-        - *id002
-        - *id003
-        - *id004
+        build-environment: *id005
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -330,6 +314,7 @@ parts:
         after:
         - kde-neon
         - akonadi
+        - akonadi-mime
         - akonadi-contact
         - akonadi-search
         plugin: cmake
@@ -369,11 +354,7 @@ parts:
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
         - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-110-qt-5-15-11-core22-sdk/current"
-        build-environment: &id005
-        - *id001
-        - *id002
-        - *id003
-        - *id004
+        build-environment: *id005
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
