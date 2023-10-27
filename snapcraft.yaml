@@ -287,7 +287,8 @@ parts:
         - libboost-dev
         - libgrantlee5-dev
         stage-packages:
-        - libgrantlee5
+        - libgrantlee-templates5
+        - libgrantlee-textdocument5
         source: https://invent.kde.org/pim/grantleetheme.git
         source-branch: release/23.08
         cmake-parameters:
