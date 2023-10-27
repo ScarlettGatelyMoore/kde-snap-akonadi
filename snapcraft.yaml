@@ -252,11 +252,9 @@ parts:
         - libkaccounts-dev
         - libkf5calendarcore-dev
         - libkf5contacts-dev
-        - libkf5mime-dev
         - libxapian-dev
         stage-packages:
         - libxapian30
-        - libkf5mime5
         - libkf5calendarcore5
         source: https://invent.kde.org/pim/akonadi-search.git
         source-branch: release/23.08
@@ -308,7 +306,6 @@ parts:
         - libkf5mailtransport5
         - libkf5messagecomposer5
         - libkf5messagecore5
-        - libkf5mime5
         - libqgpgme15
         source: https://invent.kde.org/pim/akonadi-contacts.git
         source-branch: release/23.08
@@ -361,7 +358,6 @@ parts:
         - libkf5mailtransport5
         - libkf5messagecomposer5
         - libkf5messagecore5
-        - libkf5mime5
         - libqgpgme15
         source: https://invent.kde.org/pim/akonadi-calendar.git
         source-branch: release/23.08
