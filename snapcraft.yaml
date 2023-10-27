@@ -296,6 +296,7 @@ parts:
         - libkf5messagecomposer-dev
         - libkf5templateparser-dev
         - libkf5mimetreeparser-dev
+        - libkf5prison-dev
         - libqgpgme-dev
         stage-packages:
         - libgpgmepp6
@@ -306,6 +307,7 @@ parts:
         - libkf5mailtransport5
         - libkf5messagecomposer5
         - libkf5messagecore5
+        - libkf5prison5
         - libqgpgme15
         source: https://invent.kde.org/pim/akonadi-contacts.git
         source-branch: release/23.08
