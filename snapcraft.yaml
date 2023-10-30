@@ -316,6 +316,7 @@ parts:
         - akonadi
         - akonadi-mime
         - akonadi-search
+        - grantlee-theme
         plugin: cmake
         build-packages:
         - cmake
