@@ -354,6 +354,8 @@ parts:
         - "-usr/share/locale/ca@valencia/LC_MESSAGES/libakonadi5.mo"
         - "-usr/share/locale/cs/LC_MESSAGES/libakonadi5.mo"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libakonadi5.mo"
+        - "-usr/lib/x86_64-linux-gnu/libKPim5Mime.so.5"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libkmime5.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
