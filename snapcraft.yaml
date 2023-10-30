@@ -358,6 +358,12 @@ parts:
         - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
         - "-usr/lib/aspell/*"
         - "-etc/alsa/conf.d/99-pulse.conf"
+        - -usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiCore.so.5
+        - -usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiPrivate.so.5
+        - -usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiWidgets.so.5
+        - -usr/share/locale/ca@valencia/LC_MESSAGES/libakonadi5.mo
+        - -usr/share/locale/cs/LC_MESSAGES/libakonadi5.mo
+        - -usr/share/locale/zh_CN/LC_MESSAGES/libakonadi5.mo
     akonadi-calendar:
         after:
         - kde-neon
