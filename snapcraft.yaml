@@ -360,6 +360,8 @@ parts:
         - "-usr/share/locale/ca@valencia/LC_MESSAGES/libakonadi-kmime5.mo"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libakonadi-kmime5.mo"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiSearchPIM.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5GrantleeTheme.so.5"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libgrantleetheme.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
