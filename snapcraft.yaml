@@ -411,6 +411,8 @@ parts:
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
         - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current"
         build-environment: *id005
+        stage:
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiSearchPIM.so.5"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
