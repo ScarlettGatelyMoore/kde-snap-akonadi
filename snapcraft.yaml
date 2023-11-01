@@ -305,74 +305,6 @@ parts:
         - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
         - "-usr/lib/aspell/*"
         - "-etc/alsa/conf.d/99-pulse.conf"
-    akonadi-contact:
-        after:
-        - kde-neon
-        - akonadi
-        - akonadi-mime
-        - akonadi-search
-        - grantlee-theme
-        plugin: cmake
-        build-packages:
-        - cmake
-        - libkf5calendarcore-dev
-        - libkf5calendarutils-dev
-        - libkf5contacts-dev
-        - libkf5identitymanagement-dev
-        - libkf5mailtransport-dev
-        - libkf5messagecore-dev
-        - libkf5messagecomposer-dev
-        - libkf5templateparser-dev
-        - libkf5mimetreeparser-dev
-        - libkf5prison-dev
-        - libqgpgme-dev
-        stage-packages:
-        - libgpgmepp6
-        - libkf5calendarcore5
-        - libkf5calendarutils5
-        - libkf5contacts5
-        - libkf5libkleo5
-        - libkf5mailtransport5
-        - libkf5messagecomposer5
-        - libkf5messagecore5
-        - libkf5prison5
-        - libqgpgme15
-        source: https://invent.kde.org/pim/akonadi-contacts.git
-        source-branch: release/23.08
-        cmake-parameters:
-        - "-DCMAKE_INSTALL_PREFIX=/usr"
-        - "-DCMAKE_BUILD_TYPE=Release"
-        - "-DENABLE_TESTING=OFF"
-        - "-DBUILD_TESTING=OFF"
-        - "-DKDE_SKIP_TEST_SETTINGS=ON"
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current"
-        build-environment: *id005
-        stage:
-        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiCore.so.5"
-        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiPrivate.so.5"
-        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiWidgets.so.5"
-        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libakonadi5.mo"
-        - "-usr/share/locale/cs/LC_MESSAGES/libakonadi5.mo"
-        - "-usr/share/locale/zh_CN/LC_MESSAGES/libakonadi5.mo"
-        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Mime.so.5"
-        - "-usr/share/locale/zh_CN/LC_MESSAGES/libkmime5.mo"
-        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiMime.so.5"
-        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libakonadi-kmime5.mo"
-        - "-usr/share/locale/zh_CN/LC_MESSAGES/libakonadi-kmime5.mo"
-        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiSearchPIM.so.5"
-        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5GrantleeTheme.so.5"
-        - "-usr/share/locale/zh_CN/LC_MESSAGES/libgrantleetheme.mo"
-        prime:
-        - "-usr/lib/*/cmake/*"
-        - "-usr/include/*"
-        - "-usr/share/ECM/*"
-        - "-usr/share/doc/*"
-        - "-usr/share/man/*"
-        - "-usr/share/icons/breeze-dark*"
-        - "-usr/bin/X11"
-        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
-        - "-usr/lib/aspell/*"
-        - "-etc/alsa/conf.d/99-pulse.conf"
     ksmtp:
         after:
         - kmime
@@ -438,6 +370,76 @@ parts:
         - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
         - "-usr/lib/aspell/*"
         - "-etc/alsa/conf.d/99-pulse.conf"
+    akonadi-contact:
+        after:
+        - kde-neon
+        - akonadi
+        - akonadi-mime
+        - akonadi-search
+        - grantlee-theme
+        - ksmtp
+        - kmailtransport
+        plugin: cmake
+        build-packages:
+        - cmake
+        - libkf5calendarcore-dev
+        - libkf5calendarutils-dev
+        - libkf5contacts-dev
+        - libkf5identitymanagement-dev
+        - libkf5messagecore-dev
+        - libkf5messagecomposer-dev
+        - libkf5templateparser-dev
+        - libkf5mimetreeparser-dev
+        - libkf5prison-dev
+        - libqgpgme-dev
+        stage-packages:
+        - libgpgmepp6
+        - libkf5calendarcore5
+        - libkf5calendarutils5
+        - libkf5contacts5
+        - libkf5libkleo5
+        - libkf5messagecomposer5
+        - libkf5messagecore5
+        - libkf5prison5
+        - libqgpgme15
+        source: https://invent.kde.org/pim/akonadi-contacts.git
+        source-branch: release/23.08
+        cmake-parameters:
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current"
+        build-environment: *id005
+        stage:
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiCore.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiPrivate.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiWidgets.so.5"
+        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libakonadi5.mo"
+        - "-usr/share/locale/cs/LC_MESSAGES/libakonadi5.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libakonadi5.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Mime.so.5"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libkmime5.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiMime.so.5"
+        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libakonadi-kmime5.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libakonadi-kmime5.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiSearchPIM.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5GrantleeTheme.so.5"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libgrantleetheme.mo"
+        - "-usr/lib/x86_64-linux-gnu/libKPim5SMTP.so.5"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libksmtp5.mo"
+        prime:
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze-dark*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+        - "-usr/lib/aspell/*"
+        - "-etc/alsa/conf.d/99-pulse.conf"
     akonadi-calendar:
         after:
         - kde-neon
@@ -445,6 +447,7 @@ parts:
         - akonadi-mime
         - akonadi-contact
         - akonadi-search
+        - ksmtp
         - kmailtransport
         plugin: cmake
         build-packages:
