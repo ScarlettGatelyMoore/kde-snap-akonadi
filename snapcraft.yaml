@@ -333,7 +333,7 @@ parts:
         - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
         - "-usr/lib/aspell/*"
         - "-etc/alsa/conf.d/99-pulse.conf"
-    kmailtransport:
+    libkgapi:
         after:
         - akonadi
         - akonadi-mime
@@ -342,12 +342,44 @@ parts:
         plugin: cmake
         build-packages:
         - cmake
-        - libkpimgapi-dev
+        - libkf5calendarcore-dev
+        - libsasl2-dev
+        - libxml2-utils
+        source: https://invent.kde.org/pim/libkgapi.git
+        source-branch: release/23.08
+        cmake-parameters:
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current"
+        build-environment: *id005
+        prime:
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze-dark*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+        - "-usr/lib/aspell/*"
+        - "-etc/alsa/conf.d/99-pulse.conf"
+    kmailtransport:
+        after:
+        - akonadi
+        - akonadi-mime
+        - kmime
+        - ksmtp
+        - libkgapi
+        plugin: cmake
+        build-packages:
+        - cmake
         - libsasl2-dev
         - pkg-config
         - qt5keychain-dev
         stage-packages:
-        - libkpimgapicore5
         - libqt5keychain1
         source: https://invent.kde.org/pim/kmailtransport.git
         source-branch: release/23.08
@@ -384,7 +416,6 @@ parts:
         - cmake
         - libkf5calendarcore-dev
         - libkf5calendarutils-dev
-        - libkf5contacts-dev
         - libkf5identitymanagement-dev
         - libkf5messagecore-dev
         - libkf5messagecomposer-dev
@@ -396,8 +427,7 @@ parts:
         - libgpgmepp6
         - libkf5calendarcore5
         - libkf5calendarutils5
-        - libkf5contacts5
-        - libkf5libkleo5
+         - libkf5libkleo5
         - libkf5messagecomposer5
         - libkf5messagecore5
         - libkf5prison5
@@ -454,10 +484,8 @@ parts:
         - cmake
         - libkf5calendarcore-dev
         - libkf5calendarutils-dev
-        - libkf5contacts-dev
         - libkf5identitymanagement-dev
         - libkf5libkdepim-dev
-        - libkf5mailtransport-dev
         - libkf5messagecore-dev
         - libkf5messagecomposer-dev
         - libkf5templateparser-dev
@@ -467,9 +495,7 @@ parts:
         - libgpgmepp6
         - libkf5calendarcore5
         - libkf5calendarutils5
-        - libkf5contacts5
         - libkf5libkleo5
-        - libkf5mailtransport5
         - libkf5messagecomposer5
         - libkf5messagecore5
         - libqgpgme15
