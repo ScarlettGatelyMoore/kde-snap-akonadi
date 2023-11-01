@@ -460,6 +460,8 @@ parts:
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5SMTP.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libksmtp5.mo"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5GAPICore.so.5"
+        - "-usr/lib/x86_64-linux-gnu/libKPim5MailTransport.so.5"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libmailtransport5.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
