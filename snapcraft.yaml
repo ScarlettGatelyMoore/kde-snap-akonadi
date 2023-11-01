@@ -457,8 +457,9 @@ parts:
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiSearchPIM.so.5"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5GrantleeTheme.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libgrantleetheme.mo"
-        - "-usr/lib/x86_64-linux-gnu/libKPim5SMTP.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5SMTP.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libksmtp5.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5GAPICore.so.5"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
