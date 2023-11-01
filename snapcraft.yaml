@@ -528,6 +528,10 @@ parts:
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5MailTransport.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libmailtransport5.mo"
         - "-usr/share/locale/gl/LC_MESSAGES/libmailtransport5.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5TextEdit.so.5"
+        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libkpimtextedit.mo"
+        - "-usr/share/locale/cs/LC_MESSAGES/libkpimtextedit.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libkpimtextedit.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
