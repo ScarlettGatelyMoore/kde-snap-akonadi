@@ -427,7 +427,7 @@ parts:
         - libgpgmepp6
         - libkf5calendarcore5
         - libkf5calendarutils5
-         - libkf5libkleo5
+        - libkf5libkleo5
         - libkf5messagecomposer5
         - libkf5messagecore5
         - libkf5prison5
