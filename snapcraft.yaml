@@ -446,7 +446,7 @@ parts:
         - grantlee-theme
         - ksmtp
         - kmailtransport
-        - identitymanagement
+        - kidentitymanagement
         plugin: cmake
         build-packages:
         - cmake
@@ -518,7 +518,7 @@ parts:
         - akonadi-search
         - ksmtp
         - kmailtransport
-        - identitymanagement
+        - kidentitymanagement
         plugin: cmake
         build-packages:
         - cmake
