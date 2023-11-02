@@ -532,6 +532,10 @@ parts:
         - "-usr/share/locale/ca@valencia/LC_MESSAGES/libkpimtextedit.mo"
         - "-usr/share/locale/cs/LC_MESSAGES/libkpimtextedit.mo"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libkpimtextedit.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5IdentityManagement.so.5"
+        - "-usr/lib/x86_64-linux-gnu/libKPim5IdentityManagementWidgets.so.5"
+        - "-usr/share/locale/cs/LC_MESSAGES/libkpimidentities5.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libkpimidentities5.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
