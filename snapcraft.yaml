@@ -501,6 +501,41 @@ parts:
         - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
         - "-usr/lib/aspell/*"
         - "-etc/alsa/conf.d/99-pulse.conf"
+    messagelib:
+        after:
+        - akonadi
+        - akonadi-mime
+        - kmime
+        - ksmtp
+        - libkgapi
+        - kmailtransport
+        - kpimtextedit
+        - kidentitymanagement
+        - kcalutils
+        plugin: cmake
+        build-packages:
+        - cmake
+        source: https://invent.kde.org/pim/messagelib.git
+        source-branch: release/23.08
+        cmake-parameters:
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current"
+        build-environment: *id005
+        prime:
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze-dark*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+        - "-usr/lib/aspell/*"
+        - "-etc/alsa/conf.d/99-pulse.conf"
     akonadi-contact:
         after:
         - kde-neon
@@ -512,11 +547,11 @@ parts:
         - kmailtransport
         - kidentitymanagement
         - kcalutils
+        - messagelib
         plugin: cmake
         build-packages:
         - cmake
         - libkf5calendarcore-dev
-        - libkf5messagecore-dev
         - libkf5messagecomposer-dev
         - libkf5templateparser-dev
         - libkf5mimetreeparser-dev
@@ -527,7 +562,6 @@ parts:
         - libkf5calendarcore5
         - libkf5libkleo5
         - libkf5messagecomposer5
-        - libkf5messagecore5
         - libkf5prison5
         - libqgpgme15
         source: https://invent.kde.org/pim/akonadi-contacts.git
@@ -590,13 +624,13 @@ parts:
         - ksmtp
         - kmailtransport
         - kidentitymanagement
+        - kcalutils
+        - messagelib
         plugin: cmake
         build-packages:
         - cmake
         - libkf5calendarcore-dev
-        - libkf5calendarutils-dev
         - libkf5libkdepim-dev
-        - libkf5messagecore-dev
         - libkf5messagecomposer-dev
         - libkf5templateparser-dev
         - libkf5mimetreeparser-dev
@@ -604,10 +638,8 @@ parts:
         stage-packages:
         - libgpgmepp6
         - libkf5calendarcore5
-        - libkf5calendarutils5
         - libkf5libkleo5
         - libkf5messagecomposer5
-        - libkf5messagecore5
         - libqgpgme15
         source: https://invent.kde.org/pim/akonadi-calendar.git
         source-branch: release/23.08
