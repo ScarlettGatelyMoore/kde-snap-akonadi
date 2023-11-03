@@ -512,6 +512,7 @@ parts:
         - kpimtextedit
         - kidentitymanagement
         - kcalutils
+        - akonadi-contact
         plugin: cmake
         build-packages:
         - cmake
