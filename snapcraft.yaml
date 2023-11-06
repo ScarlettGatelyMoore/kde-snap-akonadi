@@ -552,6 +552,7 @@ parts:
         plugin: cmake
         build-packages:
         - cmake
+        - libkf5doctools-dev
         source: https://invent.kde.org/pim/kldap.git
         source-branch: release/23.08
         cmake-parameters:
