@@ -696,6 +696,7 @@ parts:
         - kmailtransport
         - kidentitymanagement
         - kcalutils
+        - kldap
         plugin: cmake
         build-packages:
         - cmake
@@ -754,6 +755,8 @@ parts:
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5IMAP.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libkimap5.mo"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5IdentityManagementWidgets.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Ldap.so.5"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libkldap5.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
