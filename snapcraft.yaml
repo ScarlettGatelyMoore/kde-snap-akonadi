@@ -796,6 +796,8 @@ parts:
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Ldap.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libkldap5.mo"
         - "-usr/share/locale/fi/LC_MESSAGES/libkpimidentities5.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Libkdepim.so.5"
+        - "usr/share/locale/zh_CN/LC_MESSAGES/libkdepim.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
