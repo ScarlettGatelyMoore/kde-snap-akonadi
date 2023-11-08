@@ -591,7 +591,7 @@ parts:
         build-packages:
         - cmake
         - libkf5doctools-dev
-        source: https://invent.kde.org/pim/libkdepimp.git
+        source: https://invent.kde.org/pim/libkdepim.git
         source-branch: release/23.08
         cmake-parameters:
         - "-DCMAKE_INSTALL_PREFIX=/usr"
