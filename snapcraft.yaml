@@ -798,6 +798,8 @@ parts:
         - "-usr/share/locale/fi/LC_MESSAGES/libkpimidentities5.mo"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Libkdepim.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libkdepim.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5PimCommon.so.5"
+        - "-usr/lib/x86_64-linux-gnu/libKPim5PimCommonAkonadi.so.5"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
