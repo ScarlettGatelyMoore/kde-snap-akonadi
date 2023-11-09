@@ -840,6 +840,11 @@ parts:
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5PimCommonAkonadi.so.5"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Gravatar.so.5"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libgravatar.mo"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Libkleo.so.5"
+        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libkleopatra.mo"
+        - "-usr/share/locale/fr/LC_MESSAGES/libkleopatra.mo"
+        - "-usr/share/locale/gl/LC_MESSAGES/libkleopatra.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libkleopatra.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
