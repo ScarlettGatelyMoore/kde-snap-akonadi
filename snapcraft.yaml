@@ -820,17 +820,10 @@ parts:
         build-packages:
         - cmake
         - libkf5calendarcore-dev
-        - libkf5messagecomposer-dev
-        - libkf5templateparser-dev
-        - libkf5mimetreeparser-dev
-        - libkf5prison-dev
         - libqgpgme-dev
         stage-packages:
         - libgpgmepp6
         - libkf5calendarcore5
-        - libkf5libkleo5
-        - libkf5messagecomposer5
-        - libkf5prison5
         - libqgpgme15
         source: https://invent.kde.org/pim/akonadi-contacts.git
         source-branch: release/23.08
@@ -889,6 +882,25 @@ parts:
         - "-usr/share/locale/gl/LC_MESSAGES/libkleopatra.mo"
         - "-usr/share/locale/zh_CN/LC_MESSAGES/libkleopatra.mo"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5Mbox.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5MessageComposer.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5MessageCore.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5MessageViewer.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5MimeTreeParser.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5TemplateParser.so.5"
+        - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5WebEngineViewer.so.5"
+        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libmessagelist.mo"
+        - "-usr/share/locale/ca@valencia/LC_MESSAGES/libmessageviewer.mo"
+        - "-usr/share/locale/fr/LC_MESSAGES/libmessagecomposer.mo"
+        - "-usr/share/locale/gl/LC_MESSAGES/libmessagecomposer.mo"
+        - "-usr/share/locale/gl/LC_MESSAGES/libmessageviewer.mo"
+        - "-usr/share/locale/nl/LC_MESSAGES/libmessagecomposer.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libmessagecomposer.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libmessagecore.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libmessagelist.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libmessageviewer.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libmimetreeparser.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libtemplateparser.mo"
+        - "-usr/share/locale/zh_CN/LC_MESSAGES/libwebengineviewer.mo"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
