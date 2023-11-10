@@ -820,10 +820,12 @@ parts:
         build-packages:
         - cmake
         - libkf5calendarcore-dev
+        - libkf5prison-dev
         - libqgpgme-dev
         stage-packages:
         - libgpgmepp6
         - libkf5calendarcore5
+        - libkf5prison5
         - libqgpgme15
         source: https://invent.kde.org/pim/akonadi-contacts.git
         source-branch: release/23.08
