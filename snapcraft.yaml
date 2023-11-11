@@ -868,7 +868,7 @@ parts:
         build-packages:
         - cmake
         - libkf5doctools-dev
-        source: https://invent.kde.org/pim/ktextaddons.git
+        source: https://invent.kde.org/libraries/ktextaddons.git
         source-branch: release/23.08
         cmake-parameters:
         - -DCMAKE_INSTALL_PREFIX=/usr
