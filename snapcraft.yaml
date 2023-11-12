@@ -1033,6 +1033,13 @@ parts:
         build-packages:
         - cmake
         - libgpg-error-dev
+        - libgpgmepp-dev
+        - libgpgme-dev
+        - libqgpgme-dev
+        stage-packages:
+        - libgpgmepp6
+        - libgpgme11
+        - libqgpgme15
         source: https://invent.kde.org/pim/libkleo.git
         source-branch: release/23.08
         cmake-parameters:
