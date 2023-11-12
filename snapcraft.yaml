@@ -1032,6 +1032,7 @@ parts:
         plugin: cmake
         build-packages:
         - cmake
+        - libgpg-error-dev
         source: https://invent.kde.org/pim/libkleo.git
         source-branch: release/23.08
         cmake-parameters:
