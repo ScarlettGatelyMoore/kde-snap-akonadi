@@ -1323,6 +1323,7 @@ parts:
         after:
         - akonadi
         - akonadi-mime
+        - akonadi-calendar
         - kmime
         - ksmtp
         - libkgapi
