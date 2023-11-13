@@ -1387,7 +1387,6 @@ parts:
         - kidentitymanagement
         - kcalutils
         - messagelib
-        - calendarsupport
         plugin: cmake
         build-packages:
         - cmake
@@ -1448,6 +1447,7 @@ parts:
         - kidentitymanagement
         - kcalutils
         - messagelib
+        - calendarsupport
         plugin: cmake
         build-packages:
         - cmake
