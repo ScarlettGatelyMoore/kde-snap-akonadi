@@ -1324,6 +1324,7 @@ parts:
         - akonadi
         - akonadi-mime
         - akonadi-calendar
+        - akonadi-notes
         - kmime
         - ksmtp
         - libkgapi
