@@ -5,7 +5,7 @@ summary: KDE Akonadi data server for PIM applications
 description: KDE Akonadi data server for PIM applications shared dbus provider
 confinement: strict
 grade: stable
-version: 23.08.2
+version: 23.08.4
 compression: lzo
 architectures:
   - build-on: amd64
