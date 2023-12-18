@@ -18,6 +18,16 @@ slots:
         interface: dbus
         bus: system
         name: org.freedesktop.Akonadi
+    akonadi-slot:
+        content: akonadi-all
+        interface: content
+        read:
+        - "."
+    akonadi:
+        content: akonadi
+        interface: content
+        read:
+        - "."
 apps:
     akonadiserver:
         command: usr/bin/akonadiserver
