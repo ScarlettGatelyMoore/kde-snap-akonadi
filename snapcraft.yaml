@@ -54,10 +54,10 @@ plugs:
         interface: content
         target: $SNAP/data-dir/sounds
         default-provider: gtk-common-themes
-    kf5-5-111-qt-5-15-11-core22:
-        content: kf5-5-111-qt-5-15-11-core22-all
+    kf5-5-113-qt-5-15-11-core22:
+        content: kf5-5-113-qt-5-15-11-core22-all
         interface: content
-        default-provider: kf5-5-111-qt-5-15-11-core22
+        default-provider: kf5-5-113-qt-5-15-11-core22
         target: $SNAP/kf5
     foo-install-cups:
         interface: content
@@ -71,9 +71,8 @@ plugs:
         default-provider: hunspell-dictionaries:hunspell-dictionaries
 environment:
     SNAP_DESKTOP_RUNTIME: $SNAP/kf5
-    DK_PLUGIN_PATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/plugins/digikam"
     PERL5LIB: "$SNAP/usr/share/perl5"
-    LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/:$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/:$SNAP/usr/lib:/$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/blas:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lapack"
+    LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET:$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET:$SNAP/usr/lib:/$SNAP/usr/lib"
     DICPATH: "$SNAP/usr/share/hunspell"
 hooks:
     configure:
@@ -84,8 +83,8 @@ hooks:
 layout:
     /usr/share/qt5:
         symlink: $SNAP/kf5/usr/share/qt5
-    /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib:
-        symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib
+    /usr/lib/$CRAFT_ARCH_TRIPLET/alsa-lib:
+        symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/alsa-lib
     /usr/share/alsa:
         symlink: $SNAP/usr/share/alsa
     /usr/share/X11:
@@ -105,18 +104,18 @@ parts:
         source-type: local
         plugin: make
         make-parameters:
-        - PLATFORM_PLUG=kf5-5-111-qt-5-15-11-core22
+        - PLATFORM_PLUG=kf5-5-113-qt-5-15-11-core22
         build-snaps:
-        - kf5-5-111-qt-5-15-11-core22-sdk
+        - kf5-5-113-qt-5-15-11-core22-sdk
         build-environment:
         - &id001
-            PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+            PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
         - &id002
-            XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+            XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
         - &id003
-            XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+            XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
         - &id004
-            CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-111-qt-5-15-11-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
+            CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-113-qt-5-15-11-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
     akonadi:
         after:
         - kde-neon
@@ -168,13 +167,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         - *id001
         - *id002
         - *id003
@@ -219,13 +218,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -269,13 +268,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -322,13 +321,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -372,13 +371,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -417,13 +416,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -467,13 +466,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -520,13 +519,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -569,13 +568,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -619,13 +618,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -670,13 +669,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -723,13 +722,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -777,13 +776,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -832,13 +831,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -888,13 +887,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -945,13 +944,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -998,13 +997,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -1060,13 +1059,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -1115,13 +1114,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -1175,13 +1174,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -1235,13 +1234,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         stage:
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiCore.so.5"
         - "-usr/lib/$CRAFT_ARCH_TRIPLET/libKPim5AkonadiPrivate.so.5"
@@ -1354,13 +1353,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -1412,13 +1411,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -1471,13 +1470,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
@@ -1526,13 +1525,13 @@ parts:
         - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
         - --log-level=STATUS
         - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current\\;/usr"
+        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
         build-environment:
-        - PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         prime:
         - "-usr/lib/*/cmake/*"
         - "-usr/include/*"
