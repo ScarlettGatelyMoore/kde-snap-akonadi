@@ -33,24 +33,24 @@ apps:
         command: usr/bin/akonadiserver
         daemon: simple
         slots: [dbus-svc]
-    akonadiconsole:
-        command: usr/bin/akonadiconsole
-        desktop: usr/share/applications/org.kde.akonadiconsole.desktop
-        common-id: org.kde.akonadiconsole
-        plugs:
-        - desktop
-        - desktop-legacy
-        - opengl
-        - wayland
-        - x11
-        - audio-playback
-        - network
-        - network-bind
-        - network-manager-observe
-        - unity7
-        - cups
-        command-chain:
-        - snap/command-chain/desktop-launch
+    # akonadiconsole:
+    #     command: usr/bin/akonadiconsole
+    #     desktop: usr/share/applications/org.kde.akonadiconsole.desktop
+    #     common-id: org.kde.akonadiconsole
+    #     plugs:
+    #     - desktop
+    #     - desktop-legacy
+    #     - opengl
+    #     - wayland
+    #     - x11
+    #     - audio-playback
+    #     - network
+    #     - network-bind
+    #     - network-manager-observe
+    #     - unity7
+    #     - cups
+    #     command-chain:
+    #     - snap/command-chain/desktop-launch
 assumes:
 - snapd2.58.3
 plugs:
@@ -69,36 +69,11 @@ plugs:
         interface: content
         default-provider: kf5-5-113-qt-5-15-11-core22
         target: $SNAP/kf5
-    foo-install-cups:
-        interface: content
-        content: foo
-        default-provider: cups
-        target: $SNAP_DATA/foo
-    hunspell-dictionaries:
-        content: hunspell-dictionaries
-        interface: content
-        target: "$SNAP/usr/share/hunspell"
-        default-provider: hunspell-dictionaries:hunspell-dictionaries
 environment:
     SNAP_DESKTOP_RUNTIME: $SNAP/kf5
     PERL5LIB: "$SNAP/usr/share/perl5"
     LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET:$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET:$SNAP/usr/lib:/$SNAP/usr/lib"
     DICPATH: "$SNAP/usr/share/hunspell"
-hooks:
-    configure:
-        plugs:
-        - desktop
-        command-chain:
-        - snap/command-chain/hooks-configure-desktop
-layout:
-    /usr/share/qt5:
-        symlink: $SNAP/kf5/usr/share/qt5
-    /usr/lib/$CRAFT_ARCH_TRIPLET/alsa-lib:
-        symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/alsa-lib
-    /usr/share/alsa:
-        symlink: $SNAP/usr/share/alsa
-    /usr/share/X11:
-        symlink: $SNAP/kf5/usr/share/X11
 package-repositories:
 -   type: apt
     components:
@@ -1498,61 +1473,61 @@ parts:
         - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
         - "-usr/lib/aspell/*"
         - "-etc/alsa/conf.d/99-pulse.conf"
-    akonadiconsole:
-        after:
-        - kde-neon
-        - akonadi
-        - akonadi-mime
-        - akonadi-contact
-        - akonadi-search
-        - akonadi-calendar
-        - ksmtp
-        - kmailtransport
-        - kidentitymanagement
-        - kcalutils
-        - messagelib
-        - calendarsupport
-        plugin: cmake
-        build-packages:
-        - cmake
-        source: https://invent.kde.org/pim/akonadiconsole.git
-        source-branch: release/23.08
-        cmake-parameters:
-        - -DCMAKE_INSTALL_PREFIX=/usr
-        - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-        - -DQT_MAJOR_VERSION=5
-        - -DBUILD_WITH_QT6=OFF
-        - -DBUILD_TESTING=OFF
-        - -DBUILD_KWALLETD=OFF
-        - -DCMAKE_INSTALL_SYSCONFDIR=/etc
-        - -DCMAKE_INSTALL_LOCALSTATEDIR=/var
-        - -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON
-        - -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF
-        - -DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON
-        - -DCMAKE_INSTALL_RUNSTATEDIR=/run
-        - -DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=ON
-        - -DCMAKE_VERBOSE_MAKEFILE=ON
-        - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
-        - --log-level=STATUS
-        - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
-        - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
-        - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
-        build-environment:
-        - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
-        - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
-        - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
-        - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-        prime:
-        - "-usr/lib/*/cmake/*"
-        - "-usr/include/*"
-        - "-usr/share/ECM/*"
-        - "-usr/share/doc/*"
-        - "-usr/share/man/*"
-        - "-usr/share/icons/breeze-dark*"
-        - "-usr/bin/X11"
-        - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
-        - "-usr/lib/aspell/*"
-        - "-etc/alsa/conf.d/99-pulse.conf"
+    # akonadiconsole:
+    #     after:
+    #     - kde-neon
+    #     - akonadi
+    #     - akonadi-mime
+    #     - akonadi-contact
+    #     - akonadi-search
+    #     - akonadi-calendar
+    #     - ksmtp
+    #     - kmailtransport
+    #     - kidentitymanagement
+    #     - kcalutils
+    #     - messagelib
+    #     - calendarsupport
+    #     plugin: cmake
+    #     build-packages:
+    #     - cmake
+    #     source: https://invent.kde.org/pim/akonadiconsole.git
+    #     source-branch: release/23.08
+    #     cmake-parameters:
+    #     - -DCMAKE_INSTALL_PREFIX=/usr
+    #     - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    #     - -DQT_MAJOR_VERSION=5
+    #     - -DBUILD_WITH_QT6=OFF
+    #     - -DBUILD_TESTING=OFF
+    #     - -DBUILD_KWALLETD=OFF
+    #     - -DCMAKE_INSTALL_SYSCONFDIR=/etc
+    #     - -DCMAKE_INSTALL_LOCALSTATEDIR=/var
+    #     - -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON
+    #     - -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF
+    #     - -DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=ON
+    #     - -DCMAKE_INSTALL_RUNSTATEDIR=/run
+    #     - -DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=ON
+    #     - -DCMAKE_VERBOSE_MAKEFILE=ON
+    #     - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
+    #     - --log-level=STATUS
+    #     - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET
+    #     - "-DCMAKE_FIND_ROOT_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr\\;/snap/ffmpeg-2204-sdk/current"
+    #     - "-DCMAKE_PREFIX_PATH=$CRAFT_STAGE\\;/snap/kf5-5-113-qt-5-15-11-core22-sdk/current\\;/usr"
+    #     build-environment:
+    #     - PATH: /snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
+    #     - XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+    #     - XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+    #     - LD_LIBRARY_PATH: "/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib/${CRAFT_ARCH_TRIPLET}:/snap/kf5-5-113-qt-5-15-11-core22-sdk/current/usr/lib:$CRAFT_STAGE/usr/lib:$CRAFT_STAGE/lib/:$CRAFT_STAGE/usr/lib/${CRAFT_ARCH_TRIPLET}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    #     prime:
+    #     - "-usr/lib/*/cmake/*"
+    #     - "-usr/include/*"
+    #     - "-usr/share/ECM/*"
+    #     - "-usr/share/doc/*"
+    #     - "-usr/share/man/*"
+    #     - "-usr/share/icons/breeze-dark*"
+    #     - "-usr/bin/X11"
+    #     - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
+    #     - "-usr/lib/aspell/*"
+    #     - "-etc/alsa/conf.d/99-pulse.conf"
     cleanup:
         after:
         - akonadi
